@@ -1,0 +1,20 @@
+<!-- @for (articulo of getRecientes(); track articulo.id) { -->
+<div class="card text-center bg-light mb-2 mr-2">
+    <a>
+        <img src="{{articulo.imagen}}" class="card-img-top">
+    </a>
+    <div class="card-body">
+        <h5 class="card-title">{{articulo.nombre}}</h5>
+        <p class="card-text">{{articulo.precio | currency:" " }} €</p>
+        <!-- AQUÍ VA UN BOTÓN DE AÑADIR AL CARRITO O UN AVISO DE QUE NO HAY STOCK -->
+
+        @if (articulo.stock == true) {
+        <button>Añadir al carrito</button>
+        }
+        @else {
+        <button disabled="true">No hay stock</button>
+        }
+        <!-- <button (click)="getArticulosRecientes()">Mostrar array</button> -->
+    </div>
+</div>
+<!-- } -->

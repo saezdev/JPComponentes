@@ -1,0 +1,9 @@
+
+<div class="row">
+    <div class="row row-cols-md-5">
+        @for (articulo of getRecientes(); track articulo.id) {
+            <app-articulo [articulo]="articulo"></app-articulo>
+        }
+    </div>
+</div>
+

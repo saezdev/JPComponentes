@@ -1,0 +1,69 @@
+<!-- <p>buscador works!</p> -->
+<h3>Buscar</h3>
+
+<div class="row">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="categoriesNav">
+            <ul class="navbar-nav">
+                @for (categoria of getCategoria(); track categoria.id) {
+                    <li class="nav-item">
+                        <!-- <a (click)="mostrarProcesadores()" class="nav-link">{{categoria.nombre}}</a> -->
+                        <a (click)="cat = categoria.id" class="nav-link">{{categoria.nombre}}</a>
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </nav>
+</div>
+
+<div class="row">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="collapse navbar-collapse" id="manufacturersNav">
+            <ul class="navbar-nav">
+                @for (fabricantes of getFabricantes(); track fabricantes.id) {
+                    <li class="nav-item">
+                        <a (click)="fab = fabricantes.id" class="nav-link">{{fabricantes.nombre}}</a>
+                        <!-- <a class="nav-link">{{fabricantes.nombre}}</a> -->
+                    </li>
+
+                }
+            </ul>
+        </div>
+    </nav>
+</div>
+
+
+<!-- BUSCADOR -->
+<div class="row">
+    <div class="input-group mb-3">
+        <input #pattern (keyup)="patron = pattern.value" type="text" class="form-control" placeholder="Buscar por nombre"
+                aria-label="Buscar por nombre" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+                Buscar
+            </button>
+            <button (click)="fab = 0; cat = 0;" class="btn btn-primary" type="button">
+                Limpiar Filtros
+            </button>
+        </div>
+    </div>
+</div>
+
+<ng-container>
+    <div class="row">
+        <h5>Resultados de búsqueda</h5>
+    </div>
+    <div class="row">
+        <div class="row row-cols-md-5">
+
+            <!-- @for (articulo of filtrarArticulos(); track articulo.id) {
+                 <app-articulo [articulo]="articulo"></app-articulo>
+            } -->
+            @for (articulo of getArticulos() | filtroPatron:pattern.value | filtroCategoria:cat |filtroFabricantes:fab; track articulo.id) {
+                <app-articulo [articulo]="articulo"></app-articulo>
+            }
+            AQUÍ VA UNA REPETICIÓN DE LLAMADAS AL COMPONENTE ARTICULO
+        </div>
+    </div>
+</ng-container>
