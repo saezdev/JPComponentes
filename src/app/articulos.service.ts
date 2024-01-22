@@ -5,7 +5,10 @@ import { Injectable } from '@angular/core';
 })
 export class ArticulosService {
 
-  private categorias:Array<any> = [
+  private articulosCarrito: Array<any> = [];
+  // { id: 1, cat: 1, fab: 1, nombre: "AMD Ryzen 5 3600", precio: 199.90, stock: false, imagen: "https://thumb.pccomponentes.com/w-530-530/articles/21/213019/5-3.jpg", cantidad: 0 }
+
+  private categorias: Array<any> = [
     { id: 1, nombre: "Procesadores" },
     { id: 2, nombre: "Placas base" },
     { id: 3, nombre: "Memoria RAM" },
@@ -14,7 +17,7 @@ export class ArticulosService {
     { id: 6, nombre: "Cajas" }
   ]
 
-  private fabricantes:Array<any> = [
+  private fabricantes: Array<any> = [
     { id: 1, nombre: "AMD" },
     { id: 2, nombre: "Intel" },
     { id: 3, nombre: "MSI" },
@@ -35,7 +38,7 @@ export class ArticulosService {
     { id: 18, nombre: "Lian Li" }
   ]
 
-  private articulos:Array<any> = [
+  private articulos: Array<any> = [
     { id: 1, cat: 1, fab: 1, nombre: "AMD Ryzen 5 3600", precio: 199.90, stock: false, imagen: "https://thumb.pccomponentes.com/w-530-530/articles/21/213019/5-3.jpg" },
     { id: 2, cat: 1, fab: 1, nombre: "AMD Ryzen 5 5600X 3.7GHz", precio: 233.99, stock: true, imagen: "https://thumb.pccomponentes.com/w-530-530/articles/32/328475/1101-amd-ryzen-5-5600x-37ghz.jpg" },
     { id: 3, cat: 1, fab: 2, nombre: "Intel Core i7 11700KF", precio: 419.90, stock: true, imagen: "https://thumb.pccomponentes.com/w-300-300/articles/36/362370/1961-intel-core-i7-11700kf-36-ghz.jpg" },
@@ -66,56 +69,80 @@ export class ArticulosService {
     { id: 28, cat: 6, fab: 16, nombre: "Cooler Master MasterBox MB520 RGB Cristal Templado USB 3.0", precio: 96.99, stock: true, imagen: "https://thumb.pccomponentes.com/w-530-530/articles/33/332125/1770-cooler-master-masterbox-mb520-rgb-cristal-templado-usb-32.jpg" },
     { id: 29, cat: 6, fab: 17, nombre: "Nox Infinity SIGMA ARGB Cristal Templado USB 3.0", precio: 58.00, stock: true, imagen: "https://thumb.pccomponentes.com/w-530-530/articles/17/176010/5441.jpg" },
     { id: 30, cat: 6, fab: 18, nombre: "Lian Li PC-O11 Dynamic Cristal Templado USB 3.1 Blanca", precio: 129.98, stock: false, imagen: "https://thumb.pccomponentes.com/w-530-530/articles/25/251201/a2.jpg" }
-    ]
+  ]
 
-    constructor() { }
-    
-    getCategorias():any[] {
-      return this.categorias;
-    }
+  constructor() { }
 
-    getFabricantes():any {
-      return this.fabricantes;
-    }
-    
-    getArticulos():any[] {
-      return this.articulos;
-    }
+  getCategorias(): any[] {
+    return this.categorias;
+  }
 
-    getArticulosRecientes():any[] {
-      let recientes = [];
+  getFabricantes(): any {
+    return this.fabricantes;
+  }
 
-      for (let i = this.articulos.length-1; i >= this.articulos.length-3; i--) {
-        recientes.push(this.articulos[i]);
+  getArticulos(): any[] {
+    return this.articulos;
+  }
+
+  // getArticulosRecientes():any[] {
+  //   let recientes = [];
+
+  //   for (let i = this.articulos.length-1; i >= this.articulos.length-3; i--) {
+  //     recientes.push(this.articulos[i]);
+  //   }
+
+  //   return recientes;
+  // }
+
+  getArtRecientes(numArticulos: number) {
+    let articulosOrdenados = this.articulos.slice().sort((a, b) => (a.id - b.id))
+    return articulosOrdenados.slice(-numArticulos);
+  }
+
+
+  getArticulosPorNombre(nombre: string) {
+    let articulosPorNombre = this.getArticulos().includes(nombre);
+    return articulosPorNombre;
+  }
+
+  getProcesadores() {
+
+    let procesadores: any = [];
+
+    this.articulos.forEach(e => {
+      if (e.cat = 1) {
+        procesadores.push(e);
       }
+    })
 
-      return recientes;
+    return procesadores;
+  }
+
+  addCarrito(articulo: any) {
+
+    let comprobante = false;
+
+    this.articulosCarrito.forEach(e => {
+      if(e.id == articulo.id) {
+        comprobante = true;
+        e.cantidad++;
+      }
+    });
+
+    if(!comprobante) {
+      articulo.cantidad = 1;
+      this.articulosCarrito.push(articulo);
     }
 
-    getArtRecientes(numArticulos:number) {
-      let articulosOrdenados = this.articulos.slice().sort( (a,b) => (a.id - b.id))
-      return articulosOrdenados.slice(-numArticulos);
-    }
+    console.log("ARTICULO AÑADIDO: " + articulo.nombre + " " + articulo.cantidad)
+
+  }
+
+  getArticulosCarrito() {
+    return this.articulosCarrito;
+  }
 
 
-    getArticulosPorNombre(nombre:string) {
-      let articulosPorNombre = this.getArticulos().includes(nombre);
-      return articulosPorNombre;
-    }
-
-    getProcesadores() {
-
-      let procesadores:any = [];
-
-      this.articulos.forEach(e => {
-        if (e.cat = 1) {
-          procesadores.push(e);
-        }
-      })
-
-      return procesadores;
-    }
-
-    
 
 }

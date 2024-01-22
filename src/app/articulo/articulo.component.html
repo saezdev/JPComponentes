@@ -9,7 +9,7 @@
         <!-- AQUÍ VA UN BOTÓN DE AÑADIR AL CARRITO O UN AVISO DE QUE NO HAY STOCK -->
 
         @if (articulo.stock == true) {
-        <button>Añadir al carrito</button>
+        <button (click)="this.bd.addCarrito(articulo)">Añadir al carrito</button>
         }
         @else {
         <button disabled="true">No hay stock</button>

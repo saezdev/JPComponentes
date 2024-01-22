@@ -19,6 +19,6 @@ export class InicioComponent {
   }
 
    getRecientes() {
-    return this.bd.getArtRecientes(3);
+    return this.bd.getArtRecientes(4);
    }
 }

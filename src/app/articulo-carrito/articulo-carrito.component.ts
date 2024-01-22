@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { ArticulosService } from '../articulos.service';
 
 @Component({
   selector: 'app-articulo-carrito',
@@ -8,5 +9,16 @@ import { Component } from '@angular/core';
   styleUrl: './articulo-carrito.component.css'
 })
 export class ArticuloCarritoComponent {
+  // @Input() articulo:any
+  public bd = inject(ArticulosService);
+
+  // private articulo_carrito:Array<any> = [];
+
+
+  // addArticulosCarrito(articulo:Array<any>) {
+  //     this.articulo_carrito.push(articulo);
+  // }
+
+
 
 }

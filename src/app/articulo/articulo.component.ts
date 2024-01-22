@@ -1,17 +1,32 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
+import { ArticuloCarritoComponent } from '../articulo-carrito/articulo-carrito.component';
+import { ArticulosService } from '../articulos.service';
 
 
 @Component({
   selector: 'app-articulo',
   standalone: true,
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, ArticuloCarritoComponent],
   templateUrl: './articulo.component.html',
   styleUrl: './articulo.component.css'
 })
 export class ArticuloComponent {
   @Input() articulo:any
   @Input() buscar:any
+
+  public bd = inject(ArticulosService);
+
+
+  // private test = inject(ArticuloCarritoComponent);
+
+  // private testing = ArticuloCarritoComponent;
+
+    constructor() {
+    // this.reyesMagos = bd.getReyesMagos();
+    // this.reyesMagos = bd.getReyesMagos();
+  }
+
   
   // constructor (private bd:ArticulosService) {
   //   // this.reyesMagos = bd.getReyesMagos();
@@ -29,6 +44,8 @@ export class ArticuloComponent {
   //  getRecientes() {
   //   return this.bd.getArtRecientes(3);
   //  }
+
+  
 
    
 }
