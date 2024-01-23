@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class ArticulosService {
 
-  private articulosCarrito: Array<any> = [];
+  
   // { id: 1, cat: 1, fab: 1, nombre: "AMD Ryzen 5 3600", precio: 199.90, stock: false, imagen: "https://thumb.pccomponentes.com/w-530-530/articles/21/213019/5-3.jpg", cantidad: 0 }
 
   private categorias: Array<any> = [
@@ -119,29 +119,7 @@ export class ArticulosService {
     return procesadores;
   }
 
-  addCarrito(articulo: any) {
-
-    let comprobante = false;
-
-    this.articulosCarrito.forEach(e => {
-      if(e.id == articulo.id) {
-        comprobante = true;
-        e.cantidad++;
-      }
-    });
-
-    if(!comprobante) {
-      articulo.cantidad = 1;
-      this.articulosCarrito.push(articulo);
-    }
-
-    console.log("ARTICULO AÑADIDO: " + articulo.nombre + " " + articulo.cantidad)
-
-  }
-
-  getArticulosCarrito() {
-    return this.articulosCarrito;
-  }
+  
 
 
 

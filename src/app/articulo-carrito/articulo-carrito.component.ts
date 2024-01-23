@@ -1,5 +1,6 @@
 import { Component, Input, inject } from '@angular/core';
-import { ArticulosService } from '../articulos.service';
+// import { ArticulosService } from '../articulos.service';
+import { CarritoService } from '../carrito.service';
 
 @Component({
   selector: 'app-articulo-carrito',
@@ -10,7 +11,7 @@ import { ArticulosService } from '../articulos.service';
 })
 export class ArticuloCarritoComponent {
   // @Input() articulo:any
-  public bd = inject(ArticulosService);
+  public bd = inject(CarritoService);
 
   // private articulo_carrito:Array<any> = [];
 

@@ -15,6 +15,9 @@ import { FabricantesPipe } from '../pipes/fabricantes.pipe';
 export class BuscadorComponent {
 
   private bd = inject(ArticulosService);
+  patron = "";
+  cat = 0;
+  fab = 0;
 
   // buscar:any;
   // @Input() buscar:any
@@ -46,9 +49,7 @@ export class BuscadorComponent {
 
   // Recuperamos todos los articulos
   articulosParaMostrar = this.bd.getArticulos();
-  patron = "";
-  cat = 0;
-  fab = 0;
+
 
   // filtrarArticulos(patron:string) {
   //   // this.articulosParaMostrar = this.bd.getArticulos().filter(a => a.nombre.tolowercase().includes(patron.toLowerCase());
@@ -56,23 +57,23 @@ export class BuscadorComponent {
   // }
 
 
-  filtrarArticulos() {
-    this.articulosParaMostrar = this.bd.getArticulos();
+  // filtrarArticulos() {
+  //   this.articulosParaMostrar = this.bd.getArticulos();
 
-    // if (this.patron != "") {
-    //   this.articulosParaMostrar = this.articulosParaMostrar.filter(a => a.nombre.toLowerCase().includes(this.patron.toLowerCase()));
-    // }
+  //   // if (this.patron != "") {
+  //   //   this.articulosParaMostrar = this.articulosParaMostrar.filter(a => a.nombre.toLowerCase().includes(this.patron.toLowerCase()));
+  //   // }
 
-    // if (this.cat > 0) {
-    //   this.articulosParaMostrar = this.articulosParaMostrar.filter( a => a.cat == this.cat);
-    // }
+  //   // if (this.cat > 0) {
+  //   //   this.articulosParaMostrar = this.articulosParaMostrar.filter( a => a.cat == this.cat);
+  //   // }
 
-    // if (this.fab > 0) {
-    //   this.articulosParaMostrar = this.articulosParaMostrar.filter( a => a.fab == this.fab);
-    // }
+  //   // if (this.fab > 0) {
+  //   //   this.articulosParaMostrar = this.articulosParaMostrar.filter( a => a.fab == this.fab);
+  //   // }
 
-    return this.articulosParaMostrar;
-  }
+  //   return this.articulosParaMostrar;
+  // }
   
 
 }

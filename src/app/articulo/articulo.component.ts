@@ -2,6 +2,7 @@ import { CurrencyPipe } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { ArticuloCarritoComponent } from '../articulo-carrito/articulo-carrito.component';
 import { ArticulosService } from '../articulos.service';
+import { CarritoService } from '../carrito.service';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class ArticuloComponent {
   @Input() articulo:any
   @Input() buscar:any
 
-  public bd = inject(ArticulosService);
+  public bd = inject(CarritoService);
 
 
   // private test = inject(ArticuloCarritoComponent);

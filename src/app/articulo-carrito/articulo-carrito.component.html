@@ -10,11 +10,16 @@
 		<!-- BOTÓN PARA DECREMENTAR UNIDADES SI HAY MÁS DE 1
 		INPUT NO EDITABLE PARA MOSTRAR UNIDADES
 		BOTÓN PARA INCREMENTAR UNIDADES -->
+        @if (articulo.cantidad > 1) {
+            <button (click)="articulo.cantidad = articulo.cantidad-1">-</button>
+        }
         <input type="text" value="{{articulo.cantidad}}" readonly>
+        <button (click)="articulo.cantidad = articulo.cantidad + 1">+</button>
     </div>
-    <div>SUBTOTAL DE ESE ARTÍCULO</div>
+    <div>{{articulo.subtotal}} €</div>
     <div>
-		BOTÓN PARA ELIMINAR ESE ARTÍCULO DEL CARRITO
+        <button>ELIMINAR</button>
+		<!-- BOTÓN PARA ELIMINAR ESE ARTÍCULO DEL CARRITO -->
     </div>
 </div>
 }
@@ -29,4 +34,5 @@
         margin: 2px;
         width: 20%;
     }
+
 </style>
