@@ -1,7 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { ArticuloCarritoComponent } from '../articulo-carrito/articulo-carrito.component';
-import { ArticulosService } from '../articulos.service';
 import { CarritoService } from '../carrito.service';
 
 
@@ -45,6 +44,19 @@ export class ArticuloComponent {
   //  getRecientes() {
   //   return this.bd.getArtRecientes(3);
   //  }
+
+
+  addToCart(articulo:any) {
+    this.bd.addCarrito(articulo);
+  }
+
+  addCantidad(articulo:any) {
+    this.bd.addCantidad(articulo);
+  }
+
+  removeCantidad(articulo:any) {
+    this.bd.removeCantidad(articulo);
+  }
 
   
 

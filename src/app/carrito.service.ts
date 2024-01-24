@@ -7,7 +7,9 @@ import { elementAt } from 'rxjs';
 })
 export class CarritoService {
   private articulosCarrito: Array<any> = [];
-  constructor() { }
+  constructor() {
+    this.articulosCarrito = JSON.parse(localStorage.getItem("carrito") || '[]' ) ;
+   }
 
   addCarrito(articulo: any) {
     let comprobante = false;
@@ -21,6 +23,19 @@ export class CarritoService {
 
     //Si el articulo no se encuentra en el carrito.
     if(!comprobante) {
+
+      //Copia de array sin puntero hacia el original
+      let newArt = {...articulo}
+
+      // let newArticulo = {
+      //   id: articulo.id,
+      //   cat: articulo.cat,
+      //   fab: articulo.fab,
+      //   nombre: articulo.nombre,
+      //   imagen: articulo.imagen,
+      //   precio: articulo.precio,
+      //   unidades: 1
+      // }
       articulo.cantidad = 1;
       articulo.subtotal = parseInt(articulo.precio);
 
@@ -35,12 +50,21 @@ export class CarritoService {
     else {
       articulo.subtotal += parseInt(articulo.precio);
       console.log("SUBTOTAL DENTRO DE ELSE: " + articulo.subtotal)
+
       localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
     }
 
 
-      console.log(" LOCAL STORAGE -> " + JSON.parse(localStorage.getItem("carrito")!));
-      console.log(" LOCAL STORAGE SIN JSON PARSE -> " + localStorage.getItem("carrito"));
+      // console.log(" LOCAL STORAGE -> " + JSON.parse(localStorage.getItem("carrito")!));
+      // console.log(" LOCAL STORAGE SIN JSON PARSE -> " + localStorage.getItem("carrito"));
+  }
+
+  removeArticulo(articulo:any) {
+    let comprobacion = this.articulosCarrito.find(a => a.id == articulo.id)
+
+    if(comprobacion) {
+      // this.articulosCarrito.pop(articulo.id)
+    }
   }
 
   getArticulosCarrito() {
@@ -49,39 +73,22 @@ export class CarritoService {
   }
 
   addCantidad(articulo:any) {
-
-
-    // articulo.cantidad++;
-    // articulo.subtotal += articulo.precio;
-
-    // this.articulosCarrito.push(articulo);
-    // localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
-
-    
     let art = this.articulosCarrito.findIndex((condicion) => condicion.id === articulo.id);
     this.articulosCarrito[art].cantidad++;
     this.articulosCarrito[art].subtotal += this.articulosCarrito[art].precio;
     localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
 
-    // art.cantidad++;
-    // art.subtotal += art.precio;
+    // console.log("TEST: " + this.articulosCarrito[0].nombre)
+  }
 
-    console.log("TEST: " + this.articulosCarrito[0].nombre)
-    // console.log("ART: " + art[0].nombre)
+  removeCantidad(articulo:any) {
+    let art = this.articulosCarrito.findIndex((condicion) => condicion.id === articulo.id);
+    this.articulosCarrito[art].cantidad--;
+    this.articulosCarrito[art].subtotal -= this.articulosCarrito[art].precio;
+    localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
+  }
 
-    // localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
-
-    // // console.log("PRUEBA FIND " + this.articulosCarrito.find((condicion) => condicion.id === articulo.id).precio);
-
-    // console.log("PRUEBA FIND LOCALSTORAGE -> " + JSON.parse(localStorage.getItem("carrito")!).find((condicion:any) => condicion.id === articulo.id).nombre)
-
-
-
-    // // this.articulosCarrito.find((condicion) => condicion.id === articulo.id).nombre
-    // // console.log("PRUEBA EN ADDCANTIDAD -> " + art[0].cantidad)
-
-    // // console.log("ESTO ES UNA PRUEBA  " + JSON.parse(localStorage.getItem("carrito")!)[articulo].precio  );
-    // articulo.cantidad++;
-    // articulo.subtotal += articulo.precio;
+  isAlreadyInCart(articulo:any) {
+    return this.articulosCarrito.find( a => a.id == articulo.id);
   }
 }

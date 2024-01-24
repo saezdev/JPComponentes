@@ -14,8 +14,9 @@
 		INPUT NO EDITABLE PARA MOSTRAR UNIDADES
 		BOTÓN PARA INCREMENTAR UNIDADES -->
         @if (articulo.cantidad > 1) {
-            <!-- <button (click)="this.bd.addCantidad(articulo)">-</button> -->
-            <button (click)="articulo.cantidad = articulo.cantidad-1">-</button>
+            <button (click)="this.bd.removeCantidad(articulo)">-</button>
+            <!-- <button (click)="this.bd.removeCantidad(articulo)">-</button> -->
+            <!-- <button (click)="articulo.cantidad = articulo.cantidad-1">-</button> -->
         }
         <input type="text" value="{{articulo.cantidad}}" readonly>
         <button (click)="this.bd.addCantidad(articulo)">+</button>
