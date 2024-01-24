@@ -20,6 +20,14 @@ export class ArticuloCarritoComponent {
   //     this.articulo_carrito.push(articulo);
   // }
 
+  getSubtotal(articulo:any) {
+    return (articulo.precio * articulo.cantidad).toFixed(2);
+  }
+
+  removeArticulo(articulo:any) {
+    this.bd.removeArticulo(articulo);
+  }
+
 
 
 }

@@ -37,20 +37,14 @@ export class CarritoService {
       //   unidades: 1
       // }
       articulo.cantidad = 1;
-      articulo.subtotal = parseInt(articulo.precio);
 
-      console.log("SUBTOTAL " + articulo.subtotal)
       this.articulosCarrito.push(articulo);
 
       localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
 
-      console.log("EL ARTICULO NO SE ENCUENTRA -> LOCAL STORAGE -> " + this.articulosCarrito);
     }
     // Si el articulo se encuentra en el carrito.
     else {
-      articulo.subtotal += parseInt(articulo.precio);
-      console.log("SUBTOTAL DENTRO DE ELSE: " + articulo.subtotal)
-
       localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
     }
 
@@ -60,35 +54,40 @@ export class CarritoService {
   }
 
   removeArticulo(articulo:any) {
-    let comprobacion = this.articulosCarrito.find(a => a.id == articulo.id)
 
-    if(comprobacion) {
-      // this.articulosCarrito.pop(articulo.id)
-    }
+    console.log("DENTRO DE REMOVEARTICULO")
+    let comprobacion = this.articulosCarrito.findIndex(a => a.id == articulo.id)
+
+    this.articulosCarrito.splice(comprobacion,1);
+    localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
   }
 
   getArticulosCarrito() {
-    // return this.articulosCarrito;
-    return JSON.parse(localStorage.getItem("carrito")!);
+    return this.articulosCarrito;
+    // return JSON.parse(localStorage.getItem("carrito")!);
   }
 
   addCantidad(articulo:any) {
     let art = this.articulosCarrito.findIndex((condicion) => condicion.id === articulo.id);
     this.articulosCarrito[art].cantidad++;
-    this.articulosCarrito[art].subtotal += this.articulosCarrito[art].precio;
     localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
-
-    // console.log("TEST: " + this.articulosCarrito[0].nombre)
   }
 
   removeCantidad(articulo:any) {
     let art = this.articulosCarrito.findIndex((condicion) => condicion.id === articulo.id);
     this.articulosCarrito[art].cantidad--;
-    this.articulosCarrito[art].subtotal -= this.articulosCarrito[art].precio;
     localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
   }
 
   isAlreadyInCart(articulo:any) {
     return this.articulosCarrito.find( a => a.id == articulo.id);
+  }
+
+  getTotalPrice() {
+    let total = 0;
+    this.articulosCarrito.forEach(e => {
+      total += e.precio * e.cantidad;
+    });
+    return total;
   }
 }

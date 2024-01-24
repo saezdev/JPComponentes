@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ArticuloCarritoComponent } from '../articulo-carrito/articulo-carrito.component';
+import { CarritoService } from '../carrito.service';
 
 @Component({
   selector: 'app-carrito',
@@ -9,5 +10,12 @@ import { ArticuloCarritoComponent } from '../articulo-carrito/articulo-carrito.c
   styleUrl: './carrito.component.css'
 })
 export class CarritoComponent {
+
+  public bd = inject(CarritoService);
+
+
+  getTotalCarrito() {
+    return this.bd.getTotalPrice().toFixed(2) + " €";
+  }
 
 }

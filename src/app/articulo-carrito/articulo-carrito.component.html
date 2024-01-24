@@ -14,16 +14,16 @@
 		INPUT NO EDITABLE PARA MOSTRAR UNIDADES
 		BOTÓN PARA INCREMENTAR UNIDADES -->
         @if (articulo.cantidad > 1) {
-            <!-- <button (click)="this.bd.removeCantidad(articulo)">-</button> -->
-            <button (click)="articulo.cantidad = articulo.cantidad-1">-</button>
+            <button (click)="this.bd.removeCantidad(articulo)">-</button>
+            <!-- <button (click)="articulo.cantidad = articulo.cantidad-1">-</button> -->
         }
         <input type="text" value="{{articulo.cantidad}}" readonly>
         <button (click)="this.bd.addCantidad(articulo)">+</button>
         <!-- <button (click)="articulo.cantidad = articulo.cantidad + 1">+</button> -->
     </div>
-    <div>Subtotal: {{articulo.subtotal}} €</div>
+    <div>Subtotal: {{getSubtotal(articulo)}} €</div>
     <div>
-        <button>ELIMINAR</button>
+        <button (click)="removeArticulo(articulo)">ELIMINAR</button>
 		<!-- BOTÓN PARA ELIMINAR ESE ARTÍCULO DEL CARRITO -->
     </div>
 </div>
