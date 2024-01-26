@@ -18,4 +18,8 @@ export class CarritoComponent {
     return this.bd.getTotalPrice().toFixed(2) + " €";
   }
 
+  getArticulosCarrito() {
+    return this.bd.getArticulosCarrito();
+  }
+
 }

@@ -10,7 +10,7 @@ import { CarritoService } from '../carrito.service';
   styleUrl: './articulo-carrito.component.css'
 })
 export class ArticuloCarritoComponent {
-  // @Input() articulo:any
+  @Input() articulo:any
   public bd = inject(CarritoService);
 
   // private articulo_carrito:Array<any> = [];
