@@ -43,7 +43,7 @@
             <button class="btn btn-primary" type="button">
                 Buscar
             </button>
-            <button (click)="fab = 0; cat = 0;" class="btn btn-primary" type="button">
+            <button (click)="limpiarFiltros(); pattern.value = ''" class="btn btn-primary" type="button">
                 Limpiar Filtros
             </button>
         </div>
@@ -60,7 +60,7 @@
             <!-- @for (articulo of filtrarArticulos(); track articulo.id) {
                  <app-articulo [articulo]="articulo"></app-articulo>
             } -->
-            @for (articulo of getArticulos() | filtroPatron:pattern.value | filtroCategoria:cat |filtroFabricantes:fab; track articulo.id) {
+            @for (articulo of getArticulos() | filtroPatron:patron | filtroCategoria:cat |filtroFabricantes:fab; track articulo.id) {
                 <app-articulo [articulo]="articulo"></app-articulo>
             }
             AQUÍ VA UNA REPETICIÓN DE LLAMADAS AL COMPONENTE ARTICULO

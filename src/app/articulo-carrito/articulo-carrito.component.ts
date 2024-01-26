@@ -28,6 +28,14 @@ export class ArticuloCarritoComponent {
     this.bd.removeArticulo(articulo);
   }
 
+  removeCantidad(articulo:any) {
+    this.bd.removeCantidad(articulo);
+  }
+
+  addCantidad(articulo:any) {
+    this.bd.addCantidad(articulo);
+  }
+
 
 
 }

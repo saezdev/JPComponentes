@@ -15,17 +15,13 @@ import { FabricantesPipe } from '../pipes/fabricantes.pipe';
 export class BuscadorComponent {
 
   private bd = inject(ArticulosService);
-  patron = "";
+  patron:string = "";
   cat = 0;
   fab = 0;
 
-  // buscar:any;
-  // @Input() buscar:any
-
-  // constructor(private bd: ArticulosService) {
-  //   // this.reyesMagos = bd.getReyesMagos();
-  //   // this.reyesMagos = bd.getReyesMagos();
-  // }
+  limpiarFiltros() {
+    this.fab = 0; this.cat = 0; this.patron = ''
+  }
 
   getFabricantes() {
     return this.bd.getFabricantes();

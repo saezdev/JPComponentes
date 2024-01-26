@@ -1,4 +1,3 @@
-<!-- @for (articulo of getRecientes(); track articulo.id) { -->
 <div class="card text-center bg-light mb-2 mr-2">
     <a>
         <img src="{{articulo.imagen}}" class="card-img-top">
@@ -9,12 +8,10 @@
         <!-- AQUÍ VA UN BOTÓN DE AÑADIR AL CARRITO O UN AVISO DE QUE NO HAY STOCK -->
 
         @if (articulo.stock == true) {
-        <button (click)="this.bd.addCarrito(articulo)">Añadir al carrito</button>
+        <button (click)="this.addToCart(articulo)">Añadir al carrito</button>
         }
         @else {
         <button disabled="true">No hay stock</button>
         }
-        <!-- <button (click)="getArticulosRecientes()">Mostrar array</button> -->
     </div>
 </div>
-<!-- } -->
