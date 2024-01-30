@@ -4,11 +4,12 @@ import { ArticuloComponent } from '../articulo/articulo.component';
 import { PatronPipe } from '../pipes/patron.pipe';
 import { CategoriaPipe } from '../pipes/categoria.pipe';
 import { FabricantesPipe } from '../pipes/fabricantes.pipe';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-buscador',
   standalone: true,
-  imports: [ArticuloComponent, PatronPipe, CategoriaPipe, FabricantesPipe],
+  imports: [ArticuloComponent, PatronPipe, CategoriaPipe, FabricantesPipe, FormsModule],
   templateUrl: './buscador.component.html',
   styleUrl: './buscador.component.css'
 })

@@ -37,13 +37,14 @@
 <!-- BUSCADOR -->
 <div class="row">
     <div class="input-group mb-3">
-        <input #pattern (keyup)="patron = pattern.value" type="text" class="form-control" placeholder="Buscar por nombre"
+        <input #pattern [(ngModel)]='patron' type="text" class="form-control" placeholder="Buscar por nombre"
                 aria-label="Buscar por nombre" aria-describedby="basic-addon2">
         <div class="input-group-append">
             <button class="btn btn-primary" type="button">
                 Buscar
             </button>
-            <button (click)="limpiarFiltros(); pattern.value = ''" class="btn btn-primary" type="button">
+            <button (click)="limpiarFiltros();" class="btn btn-primary" type="button">
+            <!-- <button (click)="limpiarFiltros(); pattern.value = ''" class="btn btn-primary" type="button"> -->
                 Limpiar Filtros
             </button>
         </div>
