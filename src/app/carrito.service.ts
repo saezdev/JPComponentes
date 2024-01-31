@@ -6,7 +6,9 @@ import { elementAt } from 'rxjs';
   providedIn: 'root'
 })
 export class CarritoService {
+
   private articulosCarrito: Array<any> = [];
+
   constructor() {
     this.articulosCarrito = JSON.parse(localStorage.getItem("carrito") || '[]' ) ;
    }
@@ -23,7 +25,6 @@ export class CarritoService {
 
     //Si el articulo no se encuentra en el carrito.
     if(!comprobante) {
-
       //Copia de array sin puntero hacia el original
       let newArt = {...articulo}
 
@@ -39,13 +40,13 @@ export class CarritoService {
       articulo.cantidad = 1;
 
       this.articulosCarrito.push(articulo);
-
-      localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
-
+      this.saveToLocalStorage();
     }
     // Si el articulo se encuentra en el carrito.
     else {
-      localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
+      // localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
+      this.saveToLocalStorage();
+
     }
 
 
@@ -59,7 +60,8 @@ export class CarritoService {
     let comprobacion = this.articulosCarrito.findIndex(a => a.id == articulo.id)
 
     this.articulosCarrito.splice(comprobacion,1);
-    localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
+    this.saveToLocalStorage();
+
   }
 
   getArticulosCarrito() {
@@ -70,13 +72,14 @@ export class CarritoService {
   addCantidad(articulo:any) {
     let art = this.articulosCarrito.findIndex((condicion) => condicion.id === articulo.id);
     this.articulosCarrito[art].cantidad++;
-    localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
+    this.saveToLocalStorage();
   }
 
   removeCantidad(articulo:any) {
     let art = this.articulosCarrito.findIndex((condicion) => condicion.id === articulo.id);
     this.articulosCarrito[art].cantidad--;
-    localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
+    this.saveToLocalStorage();
+
   }
 
   isAlreadyInCart(articulo:any) {
@@ -89,5 +92,9 @@ export class CarritoService {
       total += e.precio * e.cantidad;
     });
     return total;
+  }
+
+  saveToLocalStorage() {
+    localStorage.setItem("carrito", JSON.stringify(this.articulosCarrito));
   }
 }
